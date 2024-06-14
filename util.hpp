@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <unordered_set>
 #include <vector>
 #include <sys/resource.h>
 #include <filesystem>
@@ -77,6 +78,11 @@ namespace util {
             }
         }
         qPrint("Value",toRemove,"was not found in vector!");
+    }
+
+    template <typename T>
+    bool contains(std::unordered_set<T>& inputUSet, T toCheck) {
+        return (inputUSet.find(toCheck) != inputUSet.end());
     }
 
     int
