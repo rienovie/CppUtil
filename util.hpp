@@ -98,7 +98,8 @@ namespace util {
         vectorToSingleStr(std::vector<std::string>& sFullVec,std::string sBetweenEach,bool bSkipLast = true),
         shorten(std::string& sToShorten, int iLength, char cEndOn),
         shorten(std::string& sToShorten, int iLength),
-        shorten(std::string& sToShorten, char cEndOn);
+        shorten(std::string& sToShorten, char cEndOn),
+        argvToString(char* argv);
 
     void
         printMemUse(rusage& usageRef),
