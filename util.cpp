@@ -146,7 +146,7 @@ namespace util {
 std::string argvToString(char *argv) {
     std::string output;
     int currentIndex = 0;
-    
+
     while(argv[currentIndex] != '\0') {
         output.push_back(argv[currentIndex]);
         currentIndex++;
