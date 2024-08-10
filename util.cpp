@@ -143,16 +143,32 @@ namespace util {
         return sOutput;
     }
 
-std::string argvToString(char *argv) {
-    std::string output;
-    int currentIndex = 0;
+    std::string argvToString(char *argv) {
+        std::string output;
+        int currentIndex = 0;
 
-    while(argv[currentIndex] != '\0') {
-        output.push_back(argv[currentIndex]);
-        currentIndex++;
+        while(argv[currentIndex] != '\0') {
+            output.push_back(argv[currentIndex]);
+            currentIndex++;
+        }
+
+        return output;
     }
 
-    return output;
-}
+    void removeAllOfChar(std::string &sToModify, char cToRemove) {
+        std::string sOutput;
+        for(auto& c : sToModify) {
+            if(c != cToRemove) sOutput.push_back(c);
+        }
+        sToModify = sOutput;
+    }
+
+    void removeAllOfChar(std::string& sToModify, std::string sMultiChars) {
+        std::string sOutput;
+        for(auto& c : sToModify) {
+            if(sMultiChars.find(c) == sMultiChars.npos) sOutput.push_back(c);
+        }
+        sToModify = sOutput;
+    }
 
 }

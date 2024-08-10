@@ -104,5 +104,7 @@ namespace util {
     void
         printMemUse(rusage& usageRef),
         flip(bool& toFlip),
-        toLowercase(std::string& sToModify);
+        toLowercase(std::string& sToModify),
+        removeAllOfChar(std::string& sToModify, char cToRemove),
+        removeAllOfChar(std::string &sToModify, std::string sMultiChars);
 }
