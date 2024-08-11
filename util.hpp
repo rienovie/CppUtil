@@ -85,6 +85,11 @@ namespace util {
         return (inputUSet.find(toCheck) != inputUSet.end());
     }
 
+    template <typename T>
+    bool contains(std::string& sSource, T toFind) {
+        return (sSource.find(toFind) != sSource.npos);
+    }
+
     int
         strToInt(std::string str),
         lerpInt(int iStart, int iEnd, float fLerp);
