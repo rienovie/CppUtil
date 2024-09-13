@@ -96,7 +96,10 @@ namespace util {
 
     float strToFloat(std::string str);
     std::vector<std::string> splitStringOnChar(std::string& sToSplit,char cSplit);
-    bool hasPathPermission(std::filesystem::path pPath, bool bPrintErrors = false);
+    
+    bool
+        hasPathPermission(std::filesystem::path pPath, bool bPrintErrors = false),
+        onlyContains(std::string& sSource, const char cToCheck);
 
     std::string
         vectorToSingleStr(std::vector<std::string>& sFullVec,bool bAddNewLines = true),

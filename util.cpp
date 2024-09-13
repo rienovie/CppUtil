@@ -171,4 +171,11 @@ namespace util {
         sToModify = sOutput;
     }
 
+    bool onlyContains(std::string &sSource, const char cToCheck) {
+        for(auto& c : sSource) {
+            if(c != cToCheck) return false;
+        }
+        return true;
+    }
+
 }
