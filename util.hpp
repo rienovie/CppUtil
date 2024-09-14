@@ -98,6 +98,7 @@ namespace util {
     std::vector<std::string> splitStringOnChar(std::string& sToSplit,char cSplit);
     
     bool
+        endsWith(std::string& sSource, const std::string sEnd),
         hasPathPermission(std::filesystem::path pPath, bool bPrintErrors = false),
         onlyContains(std::string& sSource, const char cToCheck);
 

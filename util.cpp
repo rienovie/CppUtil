@@ -178,4 +178,12 @@ namespace util {
         return true;
     }
 
+    bool endsWith(std::string &sSource, const std::string sEnd) {
+        for(int i = 0; i < sEnd.length(); i++) {
+            util::qPrint(sSource.at(sSource.length()-1-i));
+            if(sSource.at(sSource.length()-1-i) != sEnd.at(sEnd.length()-1-i)) return false;
+        }
+        return true;
+    }
+
 }
