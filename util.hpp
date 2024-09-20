@@ -7,6 +7,7 @@
 #include <sys/resource.h>
 #include <filesystem>
 #include <math.h>
+#include <ctime>
 #include <algorithm>
 #include <fstream>
 #include <map>
@@ -108,7 +109,8 @@ namespace util {
         shorten(std::string& sToShorten, int iLength, char cEndOn),
         shorten(std::string& sToShorten, int iLength),
         shorten(std::string& sToShorten, char cEndOn),
-        argvToString(char* argv);
+        argvToString(char* argv),
+        getCurrentDateTime();
 
     void
         printMemUse(rusage& usageRef),
