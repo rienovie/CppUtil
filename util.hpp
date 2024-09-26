@@ -91,6 +91,14 @@ namespace util {
         return (sSource.find(toFind) != sSource.npos);
     }
 
+    template <typename T>
+    bool contains(std::vector<T>& sSource, T toFind) {
+        for(auto& i : sSource) {
+            if(i == toFind) return true;
+        }
+        return false;
+    }
+
     int
         strToInt(std::string str),
         lerpInt(int iStart, int iEnd, float fLerp);
