@@ -70,6 +70,17 @@ namespace util {
         return (0 - (bReturnIndex));
     }
 
+    // Will return NULL if not found
+    template <typename A, typename B>
+    A findKey(std::map<A,B>& mSource, B toFind) {
+        for(auto& i : mSource) {
+            if(i.second == toFind) {
+                return i.first;
+            }
+        }
+        return NULL;
+    }
+
     template <typename T>
     void removeFirst(std::vector<T>& inputVector, T toRemove) {
         for(int i = 0, last = inputVector.size() - 1; i <= last; i++) {
@@ -95,6 +106,16 @@ namespace util {
     bool contains(std::vector<T>& sSource, T toFind) {
         for(auto& i : sSource) {
             if(i == toFind) return true;
+        }
+        return false;
+    }
+
+    template <typename A, typename B>
+    bool containsValue(std::map<A,B>& mSource, B toFind) {
+        for(auto& i : mSource) {
+            if(i.second == toFind) {
+                return true;
+            }
         }
         return false;
     }
