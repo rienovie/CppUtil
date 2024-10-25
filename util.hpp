@@ -8,8 +8,6 @@
 #include <filesystem>
 #include <math.h>
 #include <ctime>
-#include <algorithm>
-#include <fstream>
 #include <map>
 
 #define MACRO_ReadFileByLine(fileToOpen,sLine,code_block) { \
@@ -130,7 +128,9 @@ namespace util {
     bool
         endsWith(std::string& sSource, const std::string sEnd),
         hasPathPermission(std::filesystem::path pPath, bool bPrintErrors = false),
-        onlyContains(std::string& sSource, const char cToCheck);
+        onlyContains(std::string& sSource, const char cToCheck),
+        charFilter(char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
+        containsChar(const char* input, const char cToCheck);
 
     std::string
         vectorToSingleStr(std::vector<std::string>& sFullVec,bool bAddNewLines = true),
@@ -146,5 +146,6 @@ namespace util {
         flip(bool& toFlip),
         toLowercase(std::string& sToModify),
         removeAllOfChar(std::string& sToModify, char cToRemove),
-        removeAllOfChar(std::string &sToModify, std::string sMultiChars);
+        removeAllOfChar(std::string &sToModify, std::string sMultiChars),
+        reverseString(std::string& sInput);
 }

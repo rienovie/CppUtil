@@ -1,4 +1,6 @@
 #include "util.hpp"
+#include <cmath>
+#include <utility>
 
 namespace util {
 
@@ -47,6 +49,7 @@ namespace util {
     bool hasPathPermission ( std::filesystem::path pPath, bool bPrintErrors ) {
         try {
             if(std::filesystem::is_directory(pPath)) {
+                // NOLINTNEXTLINE(bugprone-unused-raii)
                 std::filesystem::directory_iterator{pPath}; //should fail if not accessable
                 return true;
             } else if(std::filesystem::is_regular_file(pPath)) {
@@ -193,6 +196,26 @@ namespace util {
         strftime(buf, sizeof(buf), "%Y-%m-%d-%H-%M-%S", &tstruct);
 
         return buf;
+    }
+
+    bool containsChar(const char *input, const char cToCheck) {
+        for(int i = 0; input[i] != '\0'; i++) {
+            if(input[i] == cToCheck) return true;
+        }
+        return false;
+    }
+
+    bool charFilter(char& input, const char* filter, bool bAlpha, bool bNumbers) {
+        return
+        (( bNumbers && (input > 47 && input < 58))
+        || ( bAlpha && ((input > 64 && input < 91) || (input > 96 && input < 123)))
+        || ( containsChar(filter, input)));
+    }
+
+    void reverseString(std::string &sInput) {
+        for(int i = sInput.length() - 1; i > round(sInput.length() / 2); i--) {
+            std::swap(sInput[i],sInput[sInput.length() - 1 - i]);
+        }
     }
 
 }
