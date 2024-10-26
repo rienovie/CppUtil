@@ -218,4 +218,11 @@ namespace util {
         }
     }
 
+    bool onlyContains(std::string& sSource, const char* filter) {
+        for(auto& c : sSource) {
+            if(!charFilter(c, filter)) return false;
+        }
+        return true;
+    }
+
 }
