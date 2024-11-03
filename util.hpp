@@ -36,6 +36,8 @@
 
 namespace util {
 
+    extern std::map<std::string,std::string> mColors;
+
     struct int2d {
         int x, y;
 
@@ -52,6 +54,27 @@ namespace util {
     void qPrint(T output, Args... args){
         std::cout << output << " ";
         qPrint(args...);
+    }
+
+    //Color print
+    template <typename T>
+    void cPrint(const std::string sColor,T output) {
+        if(!mColors.contains(sColor)) {
+            std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
+            qPrint(output);
+            return;
+        }
+        std::cout << mColors.at(sColor) << output << "\033[0m\n";
+    }
+    template <typename T, typename... Args>
+    void cPrint(const std::string sColor,T output, Args... args) {
+        if(!mColors.contains(sColor)) {
+            std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
+            qPrint(output,args...);
+            return;
+        }
+        std::cout << mColors.at(sColor) << output << " " << "\033[0m";
+        cPrint(sColor,args...);
     }
 
     //if bReturnIndex = false will return 0 if not found
