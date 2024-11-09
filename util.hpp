@@ -43,6 +43,7 @@ namespace util {
 
         int2d(int _x, int _y) : x(_x), y(_y) {};
         int2d() : x(0), y(0) {};
+        int2d(std::pair<int,int> _input) : x(_input.first), y(_input.second) {};
     };
 
     //quick print
