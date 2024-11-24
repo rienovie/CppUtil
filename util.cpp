@@ -13,6 +13,21 @@ namespace util {
         {"cyan","\033[36m"}
     };
 
+    alternativeVariables alt(false);
+
+    alternativeVariables::alternativeVariables(bool value) {
+        altValue = value;
+    }
+
+    void alternativeVariables::setAlt(bool value) {
+        altValue = value;
+        cPrint("magenta","Util::AlternativeValue is set to " + std::to_string(value));
+    }
+
+    bool alternativeVariables::getAlt() {
+        return altValue;
+    }
+
     float strToFloat ( std::string str ) {
         try {
             return std::stof(str);

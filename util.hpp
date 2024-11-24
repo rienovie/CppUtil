@@ -38,6 +38,23 @@ namespace util {
 
     extern std::map<std::string,std::string> mColors;
 
+    class alternativeVariables {
+        public:
+            bool getAlt();
+            void setAlt(bool value);
+
+            //contructor
+            alternativeVariables(bool value);
+
+        private:
+            bool altValue;
+    };
+    extern alternativeVariables alt;
+    template<typename T>
+    T switchOnAlt(T a, T b) {
+        return (alt.getAlt()) ? a : b;
+    }
+
     struct int2d {
         int x, y;
 
