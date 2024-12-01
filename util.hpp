@@ -9,6 +9,7 @@
 #include <math.h>
 #include <ctime>
 #include <map>
+#include <fstream> // this is for the macros
 
 #define MACRO_ReadFileByLine(fileToOpen,sLine,code_block) { \
     std::ifstream file; \
