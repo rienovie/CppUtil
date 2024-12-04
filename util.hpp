@@ -11,6 +11,7 @@
 #include <map>
 #include <fstream> // this is for the macros
 
+// Avoid these macros. They work but don't work with a debugger
 #define MACRO_ReadFileByLine(fileToOpen,sLine,code_block) { \
     std::ifstream file; \
     file.open(fileToOpen); \
@@ -24,6 +25,7 @@
     } \
 }
 
+// Avoid these macros. They work but don't work with a debugger
 #define MACRO_WriteToFile(fileToWrite,fileFlags,code_block) { \
     std::ofstream file; \
     file.open(fileToWrite,fileFlags); \
@@ -39,6 +41,7 @@ namespace util {
 
     extern std::map<std::string,std::string> mColors;
 
+    // Use instance util::alt instead of this class directly
     class alternativeVariables {
         public:
             bool getAlt();
@@ -55,6 +58,25 @@ namespace util {
     T switchOnAlt(T a, T b) {
         return (alt.getAlt()) ? a : b;
     }
+
+    // Use instance util::gate instead of this class directly
+    class class_gate {
+        public:
+            void
+                open(std::string ID),
+                close(std::string ID),
+                toggle(std::string ID),
+
+                // Will overwrite if ID already exists
+                create(std::string ID, bool bStartOpen = true);
+            bool
+                exists(std::string ID),
+                state(std::string ID);
+
+        private:
+            std::map<std::string,bool> mGates;
+    };
+    extern class_gate gate;
 
     struct int2d {
         int x, y;
@@ -175,6 +197,8 @@ namespace util {
         charFilter(char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
         containsChar(const char* input, const char cToCheck);
 
+    std::vector<std::string> fileToVector(std::string file);
+
     std::string
         vectorToSingleStr(std::vector<std::string>& sFullVec,bool bAddNewLines = true),
         vectorToSingleStr(std::vector<std::string>& sFullVec,std::string sBetweenEach,bool bSkipLast = true),
@@ -182,7 +206,8 @@ namespace util {
         shorten(std::string& sToShorten, int iLength),
         shorten(std::string& sToShorten, char cEndOn),
         argvToString(char* argv),
-        getCurrentDateTime();
+        getCurrentDateTime(),
+        fileToString(std::string file);
 
     void
         printMemUse(rusage& usageRef),

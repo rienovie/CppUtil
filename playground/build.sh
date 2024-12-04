@@ -1,5 +1,14 @@
 #!/usr/bin/bash
 
+# check if running from the util root or playground dir
+if [ -f "util.cpp" ]; then
+	cd playground
+elif [ -f "playground.cpp" ]; then
+	echo "This script was run from $(pwd)."
+	echo "Please run from either the util root dir or the playground dir."
+	exit 1
+fi
+
 if [ ! -d "build" ]; then
 	echo "Build directory not found, creating..."
 	mkdir build

@@ -1,5 +1,8 @@
 #include "util.hpp"
 #include <cmath>
+#include <cstdio>
+#include <fstream>
+#include <string>
 #include <utility>
 
 namespace util {
@@ -26,6 +29,49 @@ namespace util {
 
     bool alternativeVariables::getAlt() {
         return altValue;
+    }
+
+    class_gate gate;
+
+    bool class_gate::exists(std::string ID) {
+        return mGates.contains(ID);
+    }
+
+    bool class_gate::state(std::string ID) {
+        if(exists(ID)) {
+            return mGates.at(ID);
+        } else {
+            cPrint("red","Gate with ID",ID,"does not exist. Function will always return false.");
+            return false;
+        }
+    }
+
+    void class_gate::create(std::string ID,bool bStartOpen) {
+        mGates[ID] = bStartOpen;
+    }
+
+    void class_gate::open(std::string ID) {
+        if(exists(ID)) {
+            mGates.at(ID) = true;
+        } else {
+            cPrint("red","Gate with ID",ID,"Does not exist. Unable to open gate.");
+        }
+    }
+
+    void class_gate::close(std::string ID) {
+        if(exists(ID)) {
+            mGates.at(ID) = false;
+        } else {
+            cPrint("red","Gate with ID",ID,"Does not exist. Unable to close gate.");
+        }
+    }
+
+    void class_gate::toggle(std::string ID) {
+        if(exists(ID)) {
+            flip(mGates.at(ID));
+        } else {
+            cPrint("red","Gate with ID",ID,"Does not exist. Unable to toggle gate.");
+        }
     }
 
     float strToFloat ( std::string str ) {
@@ -247,6 +293,44 @@ namespace util {
             if(!charFilter(c, filter)) return false;
         }
         return true;
+    }
+
+    std::string fileToString(std::string file) {
+        std::string sOutput = "";
+        std::ifstream fileStream;
+
+        fileStream.open(file);
+        if(fileStream.is_open()) {
+            std::string sCurLine;
+            while(getline(fileStream, sCurLine)) {
+                sOutput.append(sCurLine);
+                sOutput.push_back('\n');
+            }
+            fileStream.close();
+        } else {
+            util::cPrint("red","File ", file, "was not opened!");
+            return "";
+        }
+
+        return sOutput;
+    }
+
+    std::vector<std::string> fileToVector(std::string file) {
+        std::vector<std::string> vOutput;
+        std::ifstream fileStream;
+
+        fileStream.open(file);
+        if(fileStream.is_open()) {
+            std::string sCurLine;
+            while(getline(fileStream, sCurLine)) {
+                vOutput.push_back(sCurLine);
+            }
+            fileStream.close();
+        } else {
+            util::cPrint("red","File ", file, "was not opened!");
+        }
+
+        return vOutput;
     }
 
 }
