@@ -20,6 +20,9 @@ int main() {
     util::gate.toggle("gate1");
     util::qPrint(util::gate.state("gate1"));
     util::qPrint(util::gate.exists("nogate"));
+    util::gate.close("nogate");
+    util::gate.open("nogate");
     util::gate.toggle("gate1");
     util::qPrint(util::gate.state("gate1"));
+
 }

@@ -86,6 +86,9 @@ namespace util {
         int2d(std::pair<int,int> _input) : x(_input.first), y(_input.second) {};
     };
 
+    void qPrint(bool output);
+    void cPrint(const std::string sColor, bool output);
+
     //quick print
     template <typename T>
     void qPrint(T output) {
@@ -94,6 +97,11 @@ namespace util {
     template <typename T, typename... Args>
     void qPrint(T output, Args... args){
         std::cout << output << " ";
+        qPrint(args...);
+    }
+    template <typename... Args>
+    void qPrint(bool output,Args... args) {
+        std::cout << (output ? "True" : "False") << " ";
         qPrint(args...);
     }
 
@@ -114,7 +122,17 @@ namespace util {
             qPrint(output,args...);
             return;
         }
-        std::cout << mColors.at(sColor) << output << " " << "\033[0m";
+        std::cout << mColors.at(sColor) << output << " \033[0m";
+        cPrint(sColor,args...);
+    }
+    template <typename... Args>
+    void cPrint(const std::string sColor, bool output, Args... args) {
+        if(!mColors.contains(sColor)) {
+            std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
+            qPrint(output,args...);
+            return;
+        }
+        std::cout << mColors.at(sColor) << (output ? "True" : "False") << " \033[0m";
         cPrint(sColor,args...);
     }
 

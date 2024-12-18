@@ -41,7 +41,7 @@ namespace util {
         if(exists(ID)) {
             return mGates.at(ID);
         } else {
-            cPrint("red","Gate with ID",ID,"does not exist. Function will always return false.");
+            cPrint("red","Gate with ID '",ID,"' does not exist / Function will always return",false);
             return false;
         }
     }
@@ -54,7 +54,7 @@ namespace util {
         if(exists(ID)) {
             mGates.at(ID) = true;
         } else {
-            cPrint("red","Gate with ID",ID,"Does not exist. Unable to open gate.");
+            cPrint("red","Gate with ID '",ID,"' does not exist / Unable to open gate");
         }
     }
 
@@ -62,7 +62,7 @@ namespace util {
         if(exists(ID)) {
             mGates.at(ID) = false;
         } else {
-            cPrint("red","Gate with ID",ID,"Does not exist. Unable to close gate.");
+            cPrint("red","Gate with ID '",ID,"' does not exist / Unable to close gate");
         }
     }
 
@@ -70,7 +70,7 @@ namespace util {
         if(exists(ID)) {
             flip(mGates.at(ID));
         } else {
-            cPrint("red","Gate with ID",ID,"Does not exist. Unable to toggle gate.");
+            cPrint("red","Gate with ID '",ID,"' does not exist / Unable to toggle gate");
         }
     }
 
@@ -331,6 +331,19 @@ namespace util {
         }
 
         return vOutput;
+    }
+
+    void qPrint(bool output) {
+        std::cout << (output ? "True" : "False") << "\n";
+    }
+
+    void cPrint(const std::string sColor, bool output) {
+        if(!mColors.contains(sColor)) {
+            std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
+            qPrint(output);
+            return;
+        }
+        std::cout << mColors.at(sColor) << (output ? "True" : "False") << "\033[0m\n";
     }
 
 }
