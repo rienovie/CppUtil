@@ -213,7 +213,8 @@ namespace util {
         onlyContains(std::string& sSource, const char cToCheck),
         onlyContains(std::string& sSource, const char* filter),
         charFilter(char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
-        containsChar(const char* input, const char cToCheck);
+        containsChar(const char* input, const char cToCheck),
+        containsAny(std::string& sSource, const char* chars);
 
     std::vector<std::string> fileToVector(std::string file);
 

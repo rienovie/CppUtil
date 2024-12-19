@@ -346,4 +346,14 @@ namespace util {
         std::cout << mColors.at(sColor) << (output ? "True" : "False") << "\033[0m\n";
     }
 
+    bool containsAny(std::string &sSource, const char *chars) {
+        for (auto& c : sSource) {
+            if(charFilter(c, chars)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
