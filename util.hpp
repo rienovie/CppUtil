@@ -1,6 +1,8 @@
 #pragma once
 
+#include <algorithm>
 #include <iostream>
+#include <iterator>
 #include <string>
 #include <unordered_set>
 #include <vector>
@@ -198,6 +200,11 @@ namespace util {
             }
         }
         return false;
+    }
+
+    template <typename T>
+    void appendVectors(std::vector<T>& appendTarget,std::vector<T>& toBeAppended) {
+        appendTarget.insert(appendTarget.end(),toBeAppended.begin(),toBeAppended.end());
     }
 
     int

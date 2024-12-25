@@ -10,6 +10,10 @@ int main() {
 
     std::vector<std::string> vFile = util::fileToVector("/home/vince/Repos/CppUtil/playground/playground.cpp");
 
+    std::vector<std::string> vToMerge = {"This is to be appended to the end of the vector!"};
+
+    util::appendVectors(vFile, vToMerge);
+
     for(auto& l : vFile) {
         util::qPrint("~|",l);
     }
