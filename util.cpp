@@ -34,7 +34,7 @@ namespace util {
     class_gate gate;
 
     bool class_gate::exists(std::string ID) {
-        return mGates.contains(ID);
+        return mGates.find(ID) != mGates.end();
     }
 
     bool class_gate::state(std::string ID) {
@@ -338,7 +338,7 @@ namespace util {
     }
 
     void cPrint(const std::string sColor, bool output) {
-        if(!mColors.contains(sColor)) {
+        if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output);
             return;

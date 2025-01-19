@@ -110,7 +110,7 @@ namespace util {
     //Color print
     template <typename T>
     void cPrint(const std::string sColor,T output) {
-        if(!mColors.contains(sColor)) {
+        if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output);
             return;
@@ -119,7 +119,7 @@ namespace util {
     }
     template <typename T, typename... Args>
     void cPrint(const std::string sColor,T output, Args... args) {
-        if(!mColors.contains(sColor)) {
+        if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output,args...);
             return;
@@ -129,7 +129,7 @@ namespace util {
     }
     template <typename... Args>
     void cPrint(const std::string sColor, bool output, Args... args) {
-        if(!mColors.contains(sColor)) {
+        if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output,args...);
             return;
