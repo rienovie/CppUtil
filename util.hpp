@@ -5,6 +5,7 @@
 #include <iterator>
 #include <string>
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
 #include <sys/resource.h>
 #include <filesystem>
@@ -205,6 +206,28 @@ namespace util {
     template <typename T>
     void appendVectors(std::vector<T>& appendTarget,std::vector<T>& toBeAppended) {
         appendTarget.insert(appendTarget.end(),toBeAppended.begin(),toBeAppended.end());
+    }
+
+    // Will increment a maped value that exists
+    // or will add key and initialize to 0 + incrementAmount
+    template <typename T>
+    void mapIncrement(std::map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
+        if(sourceMap.find(incrementKey) == sourceMap.end()) {
+            sourceMap[incrementKey] = 0 + incrementAmount;
+        } else {
+            sourceMap[incrementKey] += incrementAmount;
+        }
+    }
+
+    // Will increment a maped value that exists
+    // or will add key and initialize to 0 + incrementAmount
+    template <typename T>
+    void unordered_mapIncrement(std::unordered_map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
+        if(sourceMap.find(incrementKey) == sourceMap.end()) {
+            sourceMap[incrementKey] = 0 + incrementAmount;
+        } else {
+            sourceMap[incrementKey] += incrementAmount;
+        }
     }
 
     int

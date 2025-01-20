@@ -38,4 +38,18 @@ int main() {
         util::qPrint("Filter '" + std::string(filter) + "' / value:",util::containsAny(sTest, filter));
     }
 
+    std::unordered_map<std::string,int> mTestIncrementer = {
+        { "First" , 2 },
+        { "Second" , 8 },
+        { "Third" , 12 },
+        { "Fourth" , 3 }
+    };
+
+    util::unordered_mapIncrement(mTestIncrementer, std::string("Third"));
+    util::unordered_mapIncrement(mTestIncrementer, std::string("Five"));
+
+    for(auto& i : mTestIncrementer) {
+        util::cPrint("cyan",i.first,i.second);
+    }
+
 }
