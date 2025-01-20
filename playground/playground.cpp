@@ -52,4 +52,10 @@ int main() {
         util::cPrint("cyan",i.first,i.second);
     }
 
+    bool bTestFlipReturn = false;
+    for(int i = 0; i < 5; ++i) {
+        util::cPrint("green",util::flip(bTestFlipReturn));
+        util::qPrint(bTestFlipReturn);
+    }
+
 }

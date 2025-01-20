@@ -172,8 +172,8 @@ namespace util {
         return iStart + std::round((float(iEnd) - float(iStart)) * fLerp);
     }
 
-    void flip ( bool& toFlip ) {
-        toFlip = !toFlip;
+    bool flip ( bool& toFlip ) {
+        return (toFlip = !toFlip);
     }
 
     void toLowercase ( std::string& sToModify ) {

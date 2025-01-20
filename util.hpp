@@ -211,22 +211,26 @@ namespace util {
     // Will increment a maped value that exists
     // or will add key and initialize to 0 + incrementAmount
     template <typename T>
-    void mapIncrement(std::map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
+    int& mapIncrement(std::map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
         if(sourceMap.find(incrementKey) == sourceMap.end()) {
             sourceMap[incrementKey] = 0 + incrementAmount;
+            return sourceMap.at(incrementKey);
         } else {
             sourceMap[incrementKey] += incrementAmount;
+            return sourceMap.at(incrementKey);
         }
     }
 
     // Will increment a maped value that exists
     // or will add key and initialize to 0 + incrementAmount
     template <typename T>
-    void unordered_mapIncrement(std::unordered_map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
+    int& unordered_mapIncrement(std::unordered_map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
         if(sourceMap.find(incrementKey) == sourceMap.end()) {
             sourceMap[incrementKey] = 0 + incrementAmount;
+            return sourceMap.at(incrementKey);
         } else {
             sourceMap[incrementKey] += incrementAmount;
+            return sourceMap.at(incrementKey);
         }
     }
 
@@ -244,6 +248,7 @@ namespace util {
         onlyContains(std::string& sSource, const char* filter),
         charFilter(char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
         containsChar(const char* input, const char cToCheck),
+        flip(bool& toFlip),
         containsAny(std::string& sSource, const char* chars);
 
     std::vector<std::string> fileToVector(std::string file);
@@ -260,7 +265,6 @@ namespace util {
 
     void
         printMemUse(rusage& usageRef),
-        flip(bool& toFlip),
         toLowercase(std::string& sToModify),
         removeAllOfChar(std::string& sToModify, char cToRemove),
         removeAllOfChar(std::string &sToModify, std::string sMultiChars),
