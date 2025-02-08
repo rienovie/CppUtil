@@ -288,13 +288,6 @@ namespace util {
         }
     }
 
-    bool onlyContains(std::string& sSource, const char* filter) {
-        for(auto& c : sSource) {
-            if(!charFilter(c, filter)) return false;
-        }
-        return true;
-    }
-
     std::string fileToString(std::string file) {
         std::string sOutput = "";
         std::ifstream fileStream;
@@ -358,7 +351,7 @@ namespace util {
 
     bool onlyContains(std::string& sSource, const char* filter, const bool bAlpha, const bool bNumbers) {
         for(auto& c : sSource) {
-            if(! charFilter(c,filter,bAlpha,bNumbers)) {
+            if(!charFilter(c,filter,bAlpha,bNumbers)) {
                 return false;
             }
         }

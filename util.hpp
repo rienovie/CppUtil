@@ -246,7 +246,6 @@ namespace util {
         hasPathPermission(std::filesystem::path pPath, bool bPrintErrors = false),
         onlyContains(std::string& sSource, const char* filter,const bool bAlpha = false, const bool bNumbers = false),
         onlyContains(std::string& sSource, const char cToCheck),
-        onlyContains(std::string& sSource, const char* filter),
         charFilter(char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
         containsChar(const char* input, const char cToCheck),
         flip(bool& toFlip),
