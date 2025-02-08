@@ -356,4 +356,13 @@ namespace util {
         return false;
     }
 
+    bool onlyContains(std::string& sSource, const char* filter, const bool bAlpha, const bool bNumbers) {
+        for(auto& c : sSource) {
+            if(! charFilter(c,filter,bAlpha,bNumbers)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
