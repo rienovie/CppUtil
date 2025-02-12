@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <iterator>
 #include <string>
@@ -80,6 +81,26 @@ namespace util {
             std::map<std::string,bool> mGates;
     };
     extern class_gate gate;
+
+    // Use instance util::timer instead of this class directly
+    class class_timer {
+        public:
+            void
+                start(),
+                end();
+
+            // Returns miliseconds with "ms" appended
+            std::string getStr();
+
+            // Returns miliseconds
+            int get();
+        private:
+            bool finished = false;
+            std::chrono::high_resolution_clock::time_point
+                startTime,
+                endTime;
+    };
+    extern class_timer timer;
 
     struct int2d {
         int x, y;
@@ -265,6 +286,7 @@ namespace util {
 
     void
         printMemUse(rusage& usageRef),
+        sleep(float fSeconds),
         toLowercase(std::string& sToModify),
         removeAllOfChar(std::string& sToModify, char cToRemove),
         removeAllOfChar(std::string &sToModify, std::string sMultiChars),

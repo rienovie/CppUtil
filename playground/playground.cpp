@@ -1,5 +1,8 @@
 #include "playground.hpp"
 #include "../util.hpp"
+#include <chrono>
+#include <ctime>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -101,5 +104,13 @@ int main() {
     util::qPrint(sND,util::onlyContains(sND,"",false,false));
     util::qPrint(sN,util::onlyContains(sN,"",false,false));
     util::qPrint("");
+
+
+    float fTestSleep = 1.25;
+    util::qPrint("Sleeping",fTestSleep,"seconds.");
+    util::timer.start();
+    util::sleep(fTestSleep);
+    util::timer.end();
+    util::qPrint("Sleeping finished :",util::timer.get(),util::timer.getStr());
 
 }

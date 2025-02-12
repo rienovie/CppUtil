@@ -1,9 +1,12 @@
 #include "util.hpp"
+#include <chrono>
 #include <cmath>
 #include <cstdio>
 #include <fstream>
 #include <string>
+#include <thread>
 #include <utility>
+#include <unistd.h>
 
 namespace util {
 
@@ -32,6 +35,32 @@ namespace util {
     }
 
     class_gate gate;
+    class_timer timer;
+
+    void class_timer::start() {
+        startTime = std::chrono::high_resolution_clock::now();
+    }
+
+    void class_timer::end() {
+        endTime = std::chrono::high_resolution_clock::now();
+        finished = true;
+    }
+
+    int class_timer::get() {
+        if(!finished) {
+            util::cPrint("red","Timer get called but has not finished!");
+            return 0;
+        }
+        return std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+    }
+
+    std::string class_timer::getStr() {
+        if(!finished) {
+            util::cPrint("red","Timer get called but has not finished!");
+            return "Timer not Started.";
+        }
+        return std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count()) + "ms";
+    }
 
     bool class_gate::exists(std::string ID) {
         return mGates.find(ID) != mGates.end();
@@ -356,6 +385,10 @@ namespace util {
             }
         }
         return true;
+    }
+
+    void sleep(float fSeconds) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(int(fSeconds * 1000)));
     }
 
 }
