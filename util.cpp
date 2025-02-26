@@ -381,3 +381,7 @@ void util::sleep(const float fSeconds) {
     std::this_thread::sleep_for(std::chrono::milliseconds(int(fSeconds * 1000)));
 }
 
+std::string util::switchOnAlt(const char* a, const char* b) {
+    return std::string(alt.getAlt() ? a : b);
+}
+

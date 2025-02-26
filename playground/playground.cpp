@@ -24,8 +24,10 @@ int main() {
 
     std::string sTrue = "Value is true!", sFalse = "Value is false!";
     util::cPrint("magenta",util::switchOnAlt(sTrue, sFalse));
+    util::cPrint("cyan",util::switchOnAlt("Char* test True","Char* test False"));
     util::alt.setAlt(true);
     util::cPrint("magenta",util::switchOnAlt(sTrue, sFalse));
+    util::cPrint("cyan",util::switchOnAlt("Char* test True","Char* test False"));
     util::qPrint("");
 
     util::gate.create("gate1");

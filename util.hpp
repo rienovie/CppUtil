@@ -289,6 +289,7 @@ namespace util {
     std::vector<std::string> fileToVector(const std::string file);
 
     std::string
+        switchOnAlt(const char* a, const char* b),
         vectorToSingleStr(const std::vector<std::string>& sFullVec, const bool bAddNewLines = true),
         vectorToSingleStr(const std::vector<std::string>& sFullVec, const std::string sBetweenEach, const bool bSkipLast = true),
         shorten(const std::string& sToShorten, const int iLength, const char cEndOn),
