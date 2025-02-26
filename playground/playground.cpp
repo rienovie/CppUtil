@@ -1,8 +1,6 @@
 #include "playground.hpp"
 #include "../util.hpp"
-#include <chrono>
 #include <ctime>
-#include <functional>
 #include <string>
 #include <vector>
 
@@ -24,16 +22,23 @@ int main() {
     }
     util::qPrint("");
 
+    std::string sTrue = "Value is true!", sFalse = "Value is false!";
+    util::cPrint("magenta",util::switchOnAlt(sTrue, sFalse));
+    util::alt.setAlt(true);
+    util::cPrint("magenta",util::switchOnAlt(sTrue, sFalse));
+    util::qPrint("");
+
     util::gate.create("gate1");
-    util::qPrint(util::gate.state("gate1"));
-    util::qPrint(util::gate.state("nogate"));
+    util::qPrint("gate1 created with state",util::gate.state("gate1"));
+    util::qPrint("nogate has state",util::gate.state("nogate"));
     util::gate.toggle("gate1");
-    util::qPrint(util::gate.state("gate1"));
+    util::qPrint("gate1 toggled with state",util::gate.state("gate1"));
     util::gate.close("nogate");
-    util::qPrint(util::gate.exists("nogate"));
+    util::qPrint("nogate attempted close with exist state",util::gate.exists("nogate"));
     util::gate.open("nogate");
+    util::qPrint("nogate atttempted open with exist state",util::gate.exists("nogate"));
     util::gate.toggle("gate1");
-    util::qPrint(util::gate.state("gate1"));
+    util::qPrint("gate1 toggled with state",util::gate.state("gate1"));
     util::qPrint("");
 
     std::string sTest = "Hello thIs is 8 test.";

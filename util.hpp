@@ -1,14 +1,11 @@
 #pragma once
 
-#include <algorithm>
 #include <chrono>
 #include <iostream>
-#include <iterator>
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
 #include <vector>
-#include <sys/resource.h>
 #include <filesystem>
 #include <math.h>
 #include <ctime>
@@ -43,43 +40,51 @@
 
 namespace util {
 
+    // defined in cpp file
     extern std::map<std::string,std::string> mColors;
 
+    // Switch between two variables by global switch
     // Use instance util::alt instead of this class directly
     class alternativeVariables {
         public:
             bool getAlt();
-            void setAlt(bool value);
+            void setAlt(const bool value);
 
             //contructor
-            alternativeVariables(bool value);
+            alternativeVariables(const bool value);
 
         private:
             bool altValue;
     };
+    // Switch between two variables by global switch
+    // Value defaults to false
     extern alternativeVariables alt;
+    // Switch between two variables by global switch
+    // Value defaults to false
     template<typename T>
-    T switchOnAlt(T a, T b) {
+    T switchOnAlt(const T& a, const T& b) {
         return (alt.getAlt()) ? a : b;
     }
 
+    // Logic gate by unique string as ID but will overwrite if ID already exists
     // Use instance util::gate instead of this class directly
     class class_gate {
         public:
             void
-                open(std::string ID),
-                close(std::string ID),
-                toggle(std::string ID),
+                open(const std::string ID),
+                close(const std::string ID),
+                toggle(const std::string ID),
 
-                // Will overwrite if ID already exists
-                create(std::string ID, bool bStartOpen = true);
+                // Uses string for unique ID but will overwrite if ID already exists
+                create(const std::string ID, const bool bStartOpen = true);
             bool
-                exists(std::string ID),
-                state(std::string ID);
+                exists(const std::string ID),
+                state(const std::string ID);
 
         private:
             std::map<std::string,bool> mGates;
     };
+    // Logic gate by unique string as ID but will overwrite if ID already exists
     extern class_gate gate;
 
     // Use instance util::timer instead of this class directly
@@ -92,7 +97,7 @@ namespace util {
             // Returns miliseconds with "ms" appended
             std::string getStr();
 
-            // Returns miliseconds
+            // Returns miliseconds value
             int get();
         private:
             bool finished = false;
@@ -105,33 +110,33 @@ namespace util {
     struct int2d {
         int x, y;
 
-        int2d(int _x, int _y) : x(_x), y(_y) {};
+        int2d(const int _x, const int _y) : x(_x), y(_y) {};
         int2d() : x(0), y(0) {};
-        int2d(std::pair<int,int> _input) : x(_input.first), y(_input.second) {};
+        int2d(const std::pair<int,int> _input) : x(_input.first), y(_input.second) {};
     };
 
-    void qPrint(bool output);
-    void cPrint(const std::string sColor, bool output);
+    void qPrint(const bool output);
+    void cPrint(const std::string sColor, const bool output);
 
     //quick print
     template <typename T>
-    void qPrint(T output) {
+    void qPrint(const T output) {
         std::cout << output << "\n";
     }
     template <typename T, typename... Args>
-    void qPrint(T output, Args... args){
+    void qPrint(const T output, const Args... args){
         std::cout << output << " ";
         qPrint(args...);
     }
     template <typename... Args>
-    void qPrint(bool output,Args... args) {
+    void qPrint(const bool output, const Args... args) {
         std::cout << (output ? "True" : "False") << " ";
         qPrint(args...);
     }
 
-    //Color print
+    // Color print with predefined colors found on util.cpp beginning of file
     template <typename T>
-    void cPrint(const std::string sColor,T output) {
+    void cPrint(const std::string sColor, const T output) {
         if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output);
@@ -139,8 +144,9 @@ namespace util {
         }
         std::cout << mColors.at(sColor) << output << "\033[0m\n";
     }
+    // Color print with predefined colors found on util.cpp beginning of file
     template <typename T, typename... Args>
-    void cPrint(const std::string sColor,T output, Args... args) {
+    void cPrint(const std::string sColor, const T output, const Args... args) {
         if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output,args...);
@@ -149,8 +155,9 @@ namespace util {
         std::cout << mColors.at(sColor) << output << " \033[0m";
         cPrint(sColor,args...);
     }
+    // Color print with predefined colors found on util.cpp beginning of file
     template <typename... Args>
-    void cPrint(const std::string sColor, bool output, Args... args) {
+    void cPrint(const std::string sColor, const bool output, const Args... args) {
         if(mColors.find(sColor) == mColors.end()) {
             std::cout << mColors.at("red") << "Color '" << sColor << "' is not defined. Using qPrint..." << "\033[0m\n";
             qPrint(output,args...);
@@ -160,10 +167,12 @@ namespace util {
         cPrint(sColor,args...);
     }
 
-    //if bReturnIndex = false will return 0 if not found
-    //if bReturnIndex = true will return -1 if not found
+    // Search vector for first value that matches
+    // bReturnIndex defaults to false
+    // if bReturnIndex = false will return 0 if not found
+    // if bReturnIndex = true will return -1 if not found
     template <typename T>
-    int searchVector(std::vector<T>& inputVector, T toFind, bool bReturnIndex = false) {
+    int searchVector(const std::vector<T>& inputVector, const T toFind, const bool bReturnIndex = false) {
         int iSize = inputVector.size();
         for(int i = 0; i < iSize; i++) {
             if(inputVector[i] == toFind) {
@@ -174,19 +183,20 @@ namespace util {
         return (0 - (bReturnIndex));
     }
 
-    // Will return NULL if not found
+    // Searches thru map by value and returns key
+    // Will return nullptr if not found
     template <typename A, typename B>
-    A findKey(std::map<A,B>& mSource, B toFind) {
+    A findKey(const std::map<A,B>& mSource, const B toFind) {
         for(auto& i : mSource) {
             if(i.second == toFind) {
                 return i.first;
             }
         }
-        return NULL;
+        return nullptr;
     }
 
     template <typename T>
-    void removeFirst(std::vector<T>& inputVector, T toRemove) {
+    void removeFirst(std::vector<T>& inputVector, const T toRemove) {
         for(int i = 0, last = inputVector.size() - 1; i <= last; i++) {
             if(inputVector[i] == toRemove) {
                 inputVector.erase(inputVector.begin() + i);
@@ -197,17 +207,17 @@ namespace util {
     }
 
     template <typename T>
-    bool contains(std::unordered_set<T>& inputUSet, T toCheck) {
+    bool contains(const std::unordered_set<T>& inputUSet, const T toCheck) {
         return (inputUSet.find(toCheck) != inputUSet.end());
     }
 
     template <typename T>
-    bool contains(std::string& sSource, T toFind) {
+    bool contains(const std::string& sSource, const T toFind) {
         return (sSource.find(toFind) != sSource.npos);
     }
 
     template <typename T>
-    bool contains(std::vector<T>& sSource, T toFind) {
+    bool contains(const std::vector<T>& sSource, const T toFind) {
         for(auto& i : sSource) {
             if(i == toFind) return true;
         }
@@ -215,7 +225,7 @@ namespace util {
     }
 
     template <typename A, typename B>
-    bool containsValue(std::map<A,B>& mSource, B toFind) {
+    bool containsValue(const std::map<A,B>& mSource, const B toFind) {
         for(auto& i : mSource) {
             if(i.second == toFind) {
                 return true;
@@ -225,14 +235,14 @@ namespace util {
     }
 
     template <typename T>
-    void appendVectors(std::vector<T>& appendTarget,std::vector<T>& toBeAppended) {
+    void appendVectors(std::vector<T>& appendTarget, const std::vector<T>& toBeAppended) {
         appendTarget.insert(appendTarget.end(),toBeAppended.begin(),toBeAppended.end());
     }
 
     // Will increment a maped value that exists
     // or will add key and initialize to 0 + incrementAmount
     template <typename T>
-    int& mapIncrement(std::map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
+    int& mapIncrement(std::map<T,int>& sourceMap, const T incrementKey, const int incrementAmount = 1) {
         if(sourceMap.find(incrementKey) == sourceMap.end()) {
             sourceMap[incrementKey] = 0 + incrementAmount;
             return sourceMap.at(incrementKey);
@@ -245,7 +255,7 @@ namespace util {
     // Will increment a maped value that exists
     // or will add key and initialize to 0 + incrementAmount
     template <typename T>
-    int& unordered_mapIncrement(std::unordered_map<T,int>& sourceMap, T incrementKey, int incrementAmount = 1) {
+    int& unordered_mapIncrement(std::unordered_map<T,int>& sourceMap, const T incrementKey, const int incrementAmount = 1) {
         if(sourceMap.find(incrementKey) == sourceMap.end()) {
             sourceMap[incrementKey] = 0 + incrementAmount;
             return sourceMap.at(incrementKey);
@@ -256,39 +266,42 @@ namespace util {
     }
 
     int
-        strToInt(std::string str),
-        lerpInt(int iStart, int iEnd, float fLerp);
+        strToInt(const std::string str),
+        lerpInt(const int iStart, const int iEnd, const float fLerp);
 
-    float strToFloat(std::string str);
-    std::vector<std::string> splitStringOnChar(std::string& sToSplit,char cSplit);
+    float strToFloat(const std::string str);
+    std::vector<std::string> splitStringOnChar(const std::string& sToSplit, const char cSplit);
 
     bool
-        endsWith(std::string& sSource, const std::string sEnd),
-        hasPathPermission(std::filesystem::path pPath, bool bPrintErrors = false),
-        onlyContains(std::string& sSource, const char* filter,const bool bAlpha = false, const bool bNumbers = false),
-        onlyContains(std::string& sSource, const char cToCheck),
-        charFilter(char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
+        endsWith(const std::string& sSource, const std::string sEnd),
+        hasPathPermission(const std::filesystem::path pPath, const bool bPrintErrors = false),
+        onlyContains(const std::string& sSource, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
+        onlyContains(const std::string& sSource, const char cToCheck),
+
+        // Will return true if char is caught by filter
+        charFilter(const char& input, const char* filter, const bool bAlpha = false, const bool bNumbers = false),
         containsChar(const char* input, const char cToCheck),
         flip(bool& toFlip),
-        containsAny(std::string& sSource, const char* chars);
 
-    std::vector<std::string> fileToVector(std::string file);
+        // Each char is checked individually
+        containsAny(const std::string& sSource, const char* chars);
+
+    std::vector<std::string> fileToVector(const std::string file);
 
     std::string
-        vectorToSingleStr(std::vector<std::string>& sFullVec,bool bAddNewLines = true),
-        vectorToSingleStr(std::vector<std::string>& sFullVec,std::string sBetweenEach,bool bSkipLast = true),
-        shorten(std::string& sToShorten, int iLength, char cEndOn),
-        shorten(std::string& sToShorten, int iLength),
-        shorten(std::string& sToShorten, char cEndOn),
-        argvToString(char* argv),
+        vectorToSingleStr(const std::vector<std::string>& sFullVec, const bool bAddNewLines = true),
+        vectorToSingleStr(const std::vector<std::string>& sFullVec, const std::string sBetweenEach, const bool bSkipLast = true),
+        shorten(const std::string& sToShorten, const int iLength, const char cEndOn),
+        shorten(const std::string& sToShorten, const int iLength),
+        shorten(const std::string& sToShorten, const char cEndOn),
+        argvToString(const char* argv),
         getCurrentDateTime(),
-        fileToString(std::string file);
+        fileToString(const std::string file);
 
     void
-        printMemUse(rusage& usageRef),
-        sleep(float fSeconds),
+        sleep(const float fSeconds),
         toLowercase(std::string& sToModify),
-        removeAllOfChar(std::string& sToModify, char cToRemove),
-        removeAllOfChar(std::string &sToModify, std::string sMultiChars),
+        removeAllOfChar(std::string& sToModify, const char cToRemove),
+        removeAllOfChar(std::string &sToModify, const std::string sMultiChars),
         reverseString(std::string& sInput);
 }
