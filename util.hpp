@@ -167,6 +167,13 @@ namespace util {
         cPrint(sColor,args...);
     }
 
+    // Universal clear template
+    // Works with vectors, strings, maps, etc
+    template <typename T>
+    void clear(T& toClear) {
+        toClear.clear();
+    }
+
     // Search vector for first value that matches
     // bReturnIndex defaults to false
     // if bReturnIndex = false will return 0 if not found

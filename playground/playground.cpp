@@ -1,6 +1,5 @@
 #include "playground.hpp"
 #include "../util.hpp"
-#include <ctime>
 #include <string>
 #include <vector>
 
@@ -119,5 +118,12 @@ int main() {
     util::sleep(fTestSleep);
     util::timer.end();
     util::qPrint("Sleeping finished :",util::timer.get(),util::timer.getStr());
+
+    //map
+    util::clear(mTestIncrementer);
+    //vector
+    util::clear(charFilters);
+    //string
+    util::clear(sTest);
 
 }
