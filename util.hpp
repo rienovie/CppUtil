@@ -272,6 +272,16 @@ namespace util {
         }
     }
 
+    // Will assume to the end unless specified
+    template <typename T>
+    std::vector<T> subVector(const std::vector<T>& inputVector, const int iStart, const int iEnd = -1) {
+        if (iStart < 0 || iEnd > inputVector.size() - 1) {
+            util::cPrint("yellow","inputVector for subVector function is not within bounds of specified values.");
+            return std::vector<T>();
+        }
+        return std::vector<T>(inputVector.begin() + iStart, inputVector.begin() + (iEnd == -1 ? inputVector.size() : iEnd));
+    }
+
     int
         strToInt(const std::string str),
         lerpInt(const int iStart, const int iEnd, const float fLerp);

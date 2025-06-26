@@ -1,7 +1,6 @@
 #include "util.hpp"
 #include <chrono>
 #include <cmath>
-#include <cstdio>
 #include <fstream>
 #include <string>
 #include <thread>
@@ -307,6 +306,7 @@ void util::reverseString(std::string &sInput) {
     }
 }
 
+// TODO: make this function work better for relative file locations
 std::string util::fileToString(const std::string file) {
     std::string sOutput = "";
     std::ifstream fileStream;

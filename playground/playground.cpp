@@ -7,10 +7,10 @@ int main() {
     util::qPrint("Util Playground Hello.");
     util::qPrint("");
 
-    util::qPrint(util::fileToString("/home/vince/Repos/CppUtil/playground/playground.hpp"));
+    util::qPrint(util::fileToString("/home/vince/Repos/BullScript/BullScript_CPP_Compiler/Util/playground/playground.cpp"));
     util::qPrint("");
 
-    std::vector<std::string> vFile = util::fileToVector("/home/vince/Repos/CppUtil/playground/playground.cpp");
+    std::vector<std::string> vFile = util::fileToVector("/home/vince/Repos/BullScript/BullScript_CPP_Compiler/Util/playground/playground.cpp");
 
     std::vector<std::string> vToMerge = {"This is to be appended to the end of the vector!"};
 
@@ -20,6 +20,8 @@ int main() {
         util::qPrint("~|",l);
     }
     util::qPrint("");
+
+    util::qPrint("Sub Vector:\n",util::vectorToSingleStr(util::subVector(vFile, 10,15)));
 
     std::string sTrue = "Value is true!", sFalse = "Value is false!";
     util::cPrint("magenta",util::switchOnAlt(sTrue, sFalse));
@@ -125,5 +127,6 @@ int main() {
     util::clear(charFilters);
     //string
     util::clear(sTest);
+
 
 }
