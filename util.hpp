@@ -273,13 +273,14 @@ namespace util {
     }
 
     // Will assume to the end unless specified
+    // iEnd is inclusive
     template <typename T>
     std::vector<T> subVector(const std::vector<T>& inputVector, const int iStart, const int iEnd = -1) {
         if (iStart < 0 || iEnd > inputVector.size() - 1) {
             util::cPrint("yellow","inputVector for subVector function is not within bounds of specified values.");
             return std::vector<T>();
         }
-        return std::vector<T>(inputVector.begin() + iStart, inputVector.begin() + (iEnd == -1 ? inputVector.size() : iEnd));
+        return std::vector<T>(inputVector.begin() + iStart, inputVector.begin() + (iEnd < 0 ? inputVector.size() : iEnd + 1));
     }
 
     int
