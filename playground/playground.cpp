@@ -5,10 +5,10 @@
 
 int main() {
     util::qPrint("Util Playground Hello.");
-    util::qPrint("");
+    util::qPrint();
 
     util::qPrint(util::fileToString("/home/vince/Repos/BullScript/BullScript_CPP_Compiler/Util/playground/playground.cpp"));
-    util::qPrint("");
+    util::qPrint();
 
     std::vector<std::string> vFile = util::fileToVector("/home/vince/Repos/BullScript/BullScript_CPP_Compiler/Util/playground/playground.cpp");
 
@@ -19,7 +19,7 @@ int main() {
     for(auto& l : vFile) {
         util::qPrint("~|",l);
     }
-    util::qPrint("");
+    util::qPrint();
 
     util::qPrint("Sub Vector:\n",util::vectorToSingleStr(util::subVector(vFile, 10,15)));
 
@@ -29,7 +29,7 @@ int main() {
     util::alt.setAlt(true);
     util::cPrint("magenta",util::switchOnAlt(sTrue, sFalse));
     util::cPrint("cyan",util::switchOnAlt("Char* test True","Char* test False"));
-    util::qPrint("");
+    util::qPrint();
 
     util::gate.create("gate1");
     util::qPrint("gate1 created with state",util::gate.state("gate1"));
@@ -42,7 +42,7 @@ int main() {
     util::qPrint("nogate atttempted open with exist state",util::gate.exists("nogate"));
     util::gate.toggle("gate1");
     util::qPrint("gate1 toggled with state",util::gate.state("gate1"));
-    util::qPrint("");
+    util::qPrint();
 
     std::string sTest = "Hello thIs is 8 test.";
     std::vector<const char*> charFilters = {
@@ -52,7 +52,7 @@ int main() {
     for(auto& filter : charFilters) {
         util::qPrint("Filter '" + std::string(filter) + "' / value:",util::containsAny(sTest, filter));
     }
-    util::qPrint("");
+    util::qPrint();
 
     std::unordered_map<std::string,int> mTestIncrementer = {
         { "First" , 2 },
@@ -67,14 +67,14 @@ int main() {
     for(auto& i : mTestIncrementer) {
         util::cPrint("cyan",i.first,i.second);
     }
-    util::qPrint("");
+    util::qPrint();
 
     bool bTestFlipReturn = false;
     for(int i = 0; i < 5; ++i) {
         util::cPrint("green",util::flip(bTestFlipReturn));
         util::qPrint(bTestFlipReturn);
     }
-    util::qPrint("");
+    util::qPrint();
 
     std::string sAN = "abced827", sNAN = "abs.w2f", sNNN = "28ab,", sND = "3829.3", sN = "512421", sA = "asljdb";
     util::qPrint("Alpha=False Number=True");
@@ -84,7 +84,7 @@ int main() {
     util::qPrint(sNNN,util::onlyContains(sNNN,"",false,true));
     util::qPrint(sND,util::onlyContains(sND,"",false,true));
     util::qPrint(sN,util::onlyContains(sN,"",false,true));
-    util::qPrint("");
+    util::qPrint();
 
     util::qPrint("Alpha=True Number=True");
     util::qPrint(sA,util::onlyContains(sA,"",true,true));
@@ -93,7 +93,7 @@ int main() {
     util::qPrint(sNNN,util::onlyContains(sNNN,"",true,true));
     util::qPrint(sND,util::onlyContains(sND,"",true,true));
     util::qPrint(sN,util::onlyContains(sN,"",true,true));
-    util::qPrint("");
+    util::qPrint();
 
     util::qPrint("Alpha=True Number=False");
     util::qPrint(sA,util::onlyContains(sA,"",true,false));
@@ -102,7 +102,7 @@ int main() {
     util::qPrint(sNNN,util::onlyContains(sNNN,"",true,false));
     util::qPrint(sND,util::onlyContains(sND,"",true,false));
     util::qPrint(sN,util::onlyContains(sN,"",true,false));
-    util::qPrint("");
+    util::qPrint();
 
     util::qPrint("Alpha=False Number=False");
     util::qPrint(sA,util::onlyContains(sA,"",false,false));
@@ -111,15 +111,7 @@ int main() {
     util::qPrint(sNNN,util::onlyContains(sNNN,"",false,false));
     util::qPrint(sND,util::onlyContains(sND,"",false,false));
     util::qPrint(sN,util::onlyContains(sN,"",false,false));
-    util::qPrint("");
-
-
-    float fTestSleep = 1.25;
-    util::qPrint("Sleeping",fTestSleep,"seconds.");
-    util::timer.start();
-    util::sleep(fTestSleep);
-    util::timer.end();
-    util::qPrint("Sleeping finished :",util::timer.get(),util::timer.getStr());
+    util::qPrint();
 
     //map
     util::clear(mTestIncrementer);
@@ -128,5 +120,22 @@ int main() {
     //string
     util::clear(sTest);
 
+    util::qPrint();
 
+    util::qPrint("Color Test:");
+    for(auto& color : util::mColors) {
+        util::cPrint(color.first,color.first);
+    }
+    util::qPrint();
+
+    float fTestSleep = 1.25;
+    util::qPrint("Sleeping",fTestSleep,"seconds.");
+    util::timer.start();
+    util::sleep(fTestSleep);
+    util::timer.end();
+    util::qPrint("Sleeping finished :",util::timer.get(),util::timer.getStr());
+
+    util::qPrint();
+    util::qPrint("End of Util Playground.");
+    
 }

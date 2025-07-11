@@ -10,12 +10,15 @@
 // Put variables in this namespace section
 namespace util {
     std::map<std::string,std::string> mColors {
+        {"black","\033[30m"},
         {"red","\033[31m"},
         {"green","\033[32m"},
         {"yellow","\033[33m"},
         {"blue","\033[34m"},
         {"magenta","\033[35m"},
-        {"cyan","\033[36m"}
+        {"cyan","\033[36m"},
+        {"white","\033[37m"},
+        {"gray","\033[90m"}
     };
 
     alternativeVariables alt(false);
@@ -385,3 +388,6 @@ std::string util::switchOnAlt(const char* a, const char* b) {
     return std::string(alt.getAlt() ? a : b);
 }
 
+void util::qPrint() {
+    util::qPrint("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+}

@@ -318,6 +318,7 @@ namespace util {
         fileToString(const std::string file);
 
     void
+        qPrint(),
         sleep(const float fSeconds),
         toLowercase(std::string& sToModify),
         removeAllOfChar(std::string& sToModify, const char cToRemove),
