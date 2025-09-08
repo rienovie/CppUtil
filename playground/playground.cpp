@@ -113,14 +113,23 @@ int main() {
     util::qPrint(sN,util::onlyContains(sN,"",false,false));
     util::qPrint();
 
+    util::qPrint("Clear function");
     //map
+    util::qPrint("before:\n",mTestIncrementer);
     util::clear(mTestIncrementer);
-    //vector
-    util::clear(charFilters);
-    //string
-    util::clear(sTest);
-
+    util::qPrint("after:\n",mTestIncrementer);
     util::qPrint();
+    //vector
+    util::qPrint("before:\n",charFilters);
+    util::clear(charFilters);
+    util::qPrint("after:\n",charFilters);
+    util::qPrint();
+    //string
+    util::qPrint("before:\n",sTest);
+    util::clear(sTest);
+    util::qPrint("after:\n",sTest);
+    util::qPrint();
+
 
     util::qPrint("Color Test:");
     for(auto& color : util::mColors) {
@@ -136,6 +145,11 @@ int main() {
     util::qPrint("Sleeping finished :",util::timer.get(),util::timer.getStr());
 
     util::qPrint();
+    util::qPrint("Timer Destructor Fail Test: (Should fail on program exit)");
+    util::timer.start();
+    util::qPrint();
+
     util::qPrint("End of Util Playground.");
-    
+    util::qPrint();
+
 }

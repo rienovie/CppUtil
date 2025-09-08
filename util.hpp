@@ -3,16 +3,19 @@
 #include <chrono>
 #include <iostream>
 #include <string>
+#include <set>
 #include <unordered_set>
 #include <unordered_map>
 #include <vector>
 #include <filesystem>
 #include <math.h>
-#include <ctime>
 #include <map>
 #include <fstream> // this is for the macros
 
-// Avoid these macros. They work but don't work with a debugger
+// Avoid this macro. It works but doesn't work with a debugger
+// fileToOpen is ifstream
+// sLine is string you must create
+// code_block is code to be executed
 #define MACRO_ReadFileByLine(fileToOpen,sLine,code_block) { \
     std::ifstream file; \
     file.open(fileToOpen); \
@@ -23,18 +26,6 @@
         file.close(); \
     } else { \
         util::qPrint("Error opening file \"",fileToOpen,"\""); \
-    } \
-}
-
-// Avoid these macros. They work but don't work with a debugger
-#define MACRO_WriteToFile(fileToWrite,fileFlags,code_block) { \
-    std::ofstream file; \
-    file.open(fileToWrite,fileFlags); \
-    if(file.is_open()) { \
-        code_block; \
-        file.close(); \
-    } else { \
-        util::qPrint("Error openning file \"",fileToWrite,"\""); \
     } \
 }
 
@@ -99,8 +90,10 @@ namespace util {
 
             // Returns miliseconds value
             int get();
+
+            ~class_timer();
         private:
-            bool finished = false;
+            bool finished = true;
             std::chrono::high_resolution_clock::time_point
                 startTime,
                 endTime;
@@ -117,6 +110,38 @@ namespace util {
 
     void qPrint(const bool output);
     void cPrint(const std::string sColor, const bool output);
+
+    // need to list these first or else fails to compile
+    template <typename T, typename U>
+    void qPrint(const std::map<T,U>& output) {
+        for(auto& i : output) {
+            std::cout << i.first << ":" << i.second << "\n";
+        }
+    }
+    template <typename T>
+    void qPrint(const std::vector<T>& output) {
+        for(int i = 0, size = output.size(); i < size; i++) {
+            std::cout << i << ":" << output[i] << "\n";
+        }
+    }
+    template <typename T, typename U>
+    void qPrint(const std::unordered_map<T,U>& output) {
+        for(auto& i : output) {
+            std::cout << i.first << ":" << i.second << "\n";
+        }
+    }
+    template <typename T>
+    void qPrint(const std::set<T>& output) {
+        for(auto& i : output) {
+            std::cout << i << "\n";
+        }
+    }
+    template <typename T>
+    void qPrint(const std::unordered_set<T>& output) {
+        for(auto& i : output) {
+            std::cout << i << "\n";
+        }
+    }
 
     //quick print
     template <typename T>

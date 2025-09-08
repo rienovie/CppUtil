@@ -2,6 +2,7 @@
 #include <chrono>
 #include <cmath>
 #include <fstream>
+#include <numbers>
 #include <string>
 #include <thread>
 #include <utility>
@@ -41,6 +42,7 @@ bool util::alternativeVariables::getAlt() {
 
 void util::class_timer::start() {
     startTime = std::chrono::high_resolution_clock::now();
+    finished = false;
 }
 
 void util::class_timer::end() {
@@ -390,4 +392,11 @@ std::string util::switchOnAlt(const char* a, const char* b) {
 
 void util::qPrint() {
     util::qPrint("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+}
+
+util::class_timer::~class_timer() {
+    if(!finished) {
+        util::cPrint("red","Timer destructor called but end() was not called!");
+    }
+    end();
 }
