@@ -149,6 +149,15 @@ int main() {
     util::timer.start();
     util::qPrint();
 
+    util::qPrint();
+    util::qPrint("Include empty lines in split string true:");
+    std::vector<std::string> vTestSplit = util::splitStringOnChar("Hello\n\nWorld\n\n!\n",'\n',true);
+    util::qPrint(vTestSplit);
+    util::qPrint("Include empty lines in split string false:");
+    vTestSplit = util::splitStringOnChar("Hello\n\nWorld\n\n!\n",'\n');
+    util::qPrint(vTestSplit);
+    util::qPrint();
+
     util::qPrint("End of Util Playground.");
     util::qPrint();
 

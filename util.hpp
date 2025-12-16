@@ -313,7 +313,7 @@ namespace util {
         lerpInt(const int iStart, const int iEnd, const float fLerp);
 
     float strToFloat(const std::string str);
-    std::vector<std::string> splitStringOnChar(const std::string& sToSplit, const char cSplit);
+    std::vector<std::string> splitStringOnChar(const std::string& sToSplit, const char cSplit, bool bIncludeEmpty = false);
 
     bool
         endsWith(const std::string& sSource, const std::string sEnd),

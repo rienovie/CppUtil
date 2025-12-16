@@ -125,14 +125,14 @@ int util::strToInt(const std::string str){
     return -1;
 }
 
-std::vector<std::string> util::splitStringOnChar ( const std::string& sToSplit, const char cSplit ) {
+std::vector<std::string> util::splitStringOnChar ( const std::string& sToSplit, const char cSplit, bool bIncludeEmpty ) {
     std::vector<std::string> vOutput;
     std::string sBuild = "";
     int iStrLength = sToSplit.length();
 
     for(int i = 0; i < iStrLength; i++) {
         if(sToSplit[i] == cSplit) {
-            if(sBuild.length() == 0) { continue; } //if is blank don't add
+            if(sBuild.length() == 0 && !bIncludeEmpty) { continue; } //if is blank don't add
             vOutput.push_back(sBuild);
             sBuild.clear();
         } else { sBuild.push_back(sToSplit[i]); }
