@@ -7,6 +7,7 @@
 #include <thread>
 #include <utility>
 #include <unistd.h>
+#include <vector>
 
 // Put variables in this namespace section
 namespace util {
@@ -399,4 +400,12 @@ util::class_timer::~class_timer() {
         util::cPrint("red","Timer destructor called but end() was not called!");
     }
     end();
+}
+
+std::vector<std::string> util::argsAsStrings(const int argc, const char **argv) {
+    std::vector<std::string> output;
+    for(int i = 0; i < argc; ++i) {
+        output.push_back(std::string(argv[i]));
+    }
+    return output;
 }

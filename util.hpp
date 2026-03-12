@@ -329,7 +329,9 @@ namespace util {
         // Each char is checked individually
         containsAny(const std::string& sSource, const char* chars);
 
-    std::vector<std::string> fileToVector(const std::string file);
+    std::vector<std::string>
+        fileToVector(const std::string file),
+        argsAsStrings(const int argc, const char* argv[]);
 
     std::string
         switchOnAlt(const char* a, const char* b),

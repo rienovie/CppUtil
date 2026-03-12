@@ -3,7 +3,9 @@
 #include <string>
 #include <vector>
 
-int main() {
+int main(int argc, const char **argv) {
+    util::qPrint("Args:", util::argsAsStrings(argc, argv));
+
     util::qPrint("Util Playground Hello.");
     util::qPrint();
 
